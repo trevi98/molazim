@@ -1,5 +1,6 @@
 const express = require('express')
 const fs = require('fs');
+const path = require('path');
 const app = express()
 
 const fileUpload = require('express-fileupload');
@@ -29,4 +30,20 @@ app.post('/test',((req,res)=>{
     f.mv('./uploads/'+f.name);
     res.send('yo')
 }))
+
+app.get('/list_files_gui',((req,res)=>{
+    const directoryPath = path.join(__dirname, 'uploads');
+    fs.readdir(directoryPath, function (err, files) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        } 
+        //listing all files using forEach
+        files.forEach(function (file) {
+            // Do whatever you want to do with the file
+            res.write(file); 
+            res.send()
+        });
+    });
+}));
 app.listen(process.env.PORT || 8000)
