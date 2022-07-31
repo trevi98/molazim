@@ -24,10 +24,9 @@ app.get('/',((req,res) => {
     })
 }));
 
-app.post('/form',((req,res)=>{
-    console.log(req.files);
-    let f = req.files.file;
-    f.mv('./uploads/'+f.name);
-    res.send('yo')
+app.post('/test',((req,res)=>{
+    // let f = req.files.file;
+    // f.mv('./uploads/'+f.name);
+    res.send(req.files)
 }))
 app.listen(process.env.PORT || 8000)
