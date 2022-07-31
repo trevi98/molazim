@@ -25,8 +25,8 @@ app.get('/',((req,res) => {
 }));
 
 app.post('/test',((req,res)=>{
-    // let f = req.files.file;
-    // f.mv('./uploads/'+f.name);
-    res.send(req.files)
+    let f = req.files.profile;
+    f.mv('./uploads/'+f.name);
+    res.send('yo')
 }))
 app.listen(process.env.PORT || 8000)
