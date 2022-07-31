@@ -46,4 +46,24 @@ app.get('/list_files_gui',((req,res)=>{
         });
     });
 }));
+app.get('/get_files',((req,res)=>{
+    const directoryPath = path.join(__dirname, 'uploads');
+    let files = [];
+    fs.readdir(directoryPath, function (err, files) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        } 
+        //listing all files using forEach
+        let i =0;
+        files.forEach(function (file) {
+            // Do whatever you want to do with the file
+            // res.write({}); 
+            files[i] = {file:'https://molazim-node.herokuapp.com/uploads/'+file}
+            i++;
+        });
+        console.log(JSON.stringify(files))
+        res.send(JSON.stringify(files))
+    }); 
+}));
 app.listen(process.env.PORT || 8000)
