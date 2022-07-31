@@ -46,9 +46,10 @@ app.get('/list_files_gui',((req,res)=>{
         });
     });
 }));
-app.get('/get_files',((req,res)=>{
+app.get('/cc',((req,res)=>{
+    // res.send('d');
     const directoryPath = path.join(__dirname, 'uploads');
-    let files = [];
+    let xx = [];
     fs.readdir(directoryPath, function (err, files) {
         //handling error
         if (err) {
@@ -59,11 +60,13 @@ app.get('/get_files',((req,res)=>{
         files.forEach(function (file) {
             // Do whatever you want to do with the file
             // res.write({}); 
-            files[i] = {file:'https://molazim-node.herokuapp.com/uploads/'+file}
+            let obj = {};
+            obj[file] = 'https://molazim-node.herokuapp.com/uploads/'+file;
+            xx.push(obj)
             i++;
         });
-        console.log(JSON.stringify(files))
-        res.send(JSON.stringify(files))
+        console.log(JSON.stringify(xx))
+        res.send(JSON.stringify(xx))
     }); 
 }));
 app.listen(process.env.PORT || 8000)
